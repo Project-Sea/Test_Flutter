@@ -1,2 +1,3 @@
 # Test_Flutter
-Flutter Visual Studio Code 확인
+Flutter 개발 프로젝트
+개발 환경: Visual Studio Code
