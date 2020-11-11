@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:hello_world/bottomAppBar.dart';
 
 void main() => runApp(MyApp());
 
@@ -13,93 +12,126 @@ class MyApp extends StatelessWidget {
         primaryColor: const Color(0xFF3C63D9),
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: 'Project Sea Home'),
+      home: MyHomePage(),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-
-  final String title;
-  // final void Function(String value) showInSnackBar;
-
+  MyHomePage({Key key}) : super(key: key);
+  
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  var _showFab = true;
-  var _showNotch = true;
-  var _fabLocation = FloatingActionButtonLocation.endDocked;
-
-  void _onShowNotchChacnged(bool value) {
-    setState(() {
-      _showNotch = value;
-    });
-  }
-
-  void _onShowFabChanged(bool value) {
-    setState(() {
-      _showFab = value;
-    });
-  }
-
-  void _onFabLocationChanged(FloatingActionButtonLocation value) {
-    setState(() {
-      _fabLocation = value;
-    });
-  }
+  var _onFloatingButton = true;
+  var _onNotch = true;
+  var _FloatingButtonLocation = FloatingActionButtonLocation.endDocked;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
-        leading: Icon(Icons.cake),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.message),
-            tooltip: "Check Issue",
-            onPressed: () => {},
-          ),
-        ],
+        title: Text('Project Sea'),
       ),
-      body: Container(
+      body: new Container(
         color: Color(0xFFFFFFFF),
-        padding: EdgeInsets.all(5),
+        padding: const EdgeInsets.all(3),
         alignment: Alignment.center,
-        child: Column(
+        child: new Column(
           mainAxisAlignment: MainAxisAlignment.start,
           mainAxisSize: MainAxisSize.max,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            Text(
-              "1st Line",
-              style: TextStyle(
-                  fontSize: 20,
-                  color: Color(0xFF000000),
-                  fontFamily: "Consolas"),
-            ),
-            Text(
-              "2nd Line",
-              style: TextStyle(
-                  fontSize: 30,
-                  color: Color(0xFFFF0000),
-                  fontFamily: "Consolas"),
-            ),
-            floaingActionButton: _showFab
-                ? FloatingActionButton(
-                  onPressed: () {
-                    print('Floating action button pressed');
-                  },
-                  child: const Icon(Icons.add),
+            new Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisSize: MainAxisSize.max,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  'Test 1',
+                  style: TextStyle(fontSize: 20, color: Color(0xFF000000)),
                 ),
-                : null,
-            floatingActionButtonLocation: _fabLocation,
-            bottomNavigationBar: _DemoBottomAppBar(
-              fabLocation: _fabLocation,
-              shape: _showFab ? const CircularNotchedRectangle() : null,
+                Padding(padding: EdgeInsets.all(10)),
+                Text(
+                  'Test 2',
+                  style: TextStyle(fontSize: 30, color: Color(0xFF000000)),
+                ),
+              ],
+            ),
+            new SwitchListTile(
+              title: const Text('플로팅 작업 버튼'),
+              value: _onFloatingButton,
+              onChanged: (bool value) {
+                setState(() {
+                  _onFloatingButton = value;
+                });
+              },
+            ),
+            new SwitchListTile(
+                title: Text('노치'),
+                value: _onNotch,
+                onChanged: (bool value) {
+                  setState(() {
+                    _onNotch = value;
+                  });
+                }),
+            Padding(
+              padding: EdgeInsets.all(30),
+              child: Text(
+                '플로팅 작업 버튼 위치',
+                style: TextStyle(fontWeight: FontWeight.w200),
+              ),
+            ),
+            new RadioListTile<FloatingActionButtonLocation>(
+              title: Text('도킹됨-끝'),
+              value: FloatingActionButtonLocation.endDocked,
+              groupValue: _FloatingButtonLocation,
+              onChanged: (FloatingActionButtonLocation value) {
+                setState(() {
+                  _FloatingButtonLocation = value;
+                });
+              },
+            ),
+            new RadioListTile<FloatingActionButtonLocation>(
+              title: Text('도킹됨-중앙'),
+              value: FloatingActionButtonLocation.centerDocked,
+              groupValue: _FloatingButtonLocation,
+              onChanged: (FloatingActionButtonLocation value) {
+                setState(() {
+                  _FloatingButtonLocation = value;
+                });
+              },
+            ),
+            new RadioListTile<FloatingActionButtonLocation>(
+              title: Text('플로팅-끝'),
+              value: FloatingActionButtonLocation.endFloat,
+              groupValue: _FloatingButtonLocation,
+              onChanged: (FloatingActionButtonLocation value) {
+                setState(() {
+                  _FloatingButtonLocation = value;
+                });
+              },
+            ),
+            new RadioListTile<FloatingActionButtonLocation>(
+              title: Text('플로팅-중앙'),
+              value: FloatingActionButtonLocation.centerFloat,
+              groupValue: _FloatingButtonLocation,
+              onChanged: (FloatingActionButtonLocation value) {
+                setState(() {
+                  _FloatingButtonLocation = value;
+                });
+              },
+            ),
+            FloatingActionButton(
+              onPressed: () {},
+              child: Icon(Icons.add),
+              backgroundColor: Colors.red,
+            ),
+            BottomNavigationBar: _DemoBottomAppBar(
+              FABLocation: _FloatingButtonLocation,
+              shape: _onNotch ? const CircularNotchedRectangle() : null,
             ),
           ],
         ),
