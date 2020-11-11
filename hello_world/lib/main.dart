@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'page1.dart';
+import 'page2.dart';
+import 'page3.dart';
 
 void main() => runApp(MyApp());
 
@@ -23,6 +26,11 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   var _index = 0;
+  var _pages = [
+    Page1(),
+    Page2(),
+    Page3(),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -46,12 +54,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ],
       ),
-      body: Center(
-        child: Text(
-          '$_index page',
-          style: TextStyle(fontSize: 40),
-        ),
-      ),
+      body: _pages[_index],
       bottomNavigationBar: BottomNavigationBar(
         onTap: (index) {
           setState(() {
