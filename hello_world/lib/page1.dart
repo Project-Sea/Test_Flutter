@@ -13,7 +13,15 @@ class Page1 extends StatelessWidget {
   }
 
   Widget _buildTop() {
-    return Text('Top');
+    return Column(
+      children: <Widget>[
+        Icon(
+          Icons.local_taxi,
+          size: 40,
+        ),
+        Text('택시'),
+      ],
+    );
   }
 
   Widget _buildMiddle() {
