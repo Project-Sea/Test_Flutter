@@ -18,14 +18,19 @@ class Page1 extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-            Column(
-              children: <Widget>[
-                Icon(
-                  Icons.local_taxi,
-                  size: 40,
-                ),
-                Text('택시'),
-              ],
+            GestureDetector(
+              onTap: () {
+                print('Click');
+              },
+              child: Column(
+                children: <Widget>[
+                  Icon(
+                    Icons.local_taxi,
+                    size: 40,
+                  ),
+                  Text('택시'),
+                ],
+              ),
             ),
             Column(
               children: <Widget>[
