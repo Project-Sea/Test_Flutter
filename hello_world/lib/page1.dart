@@ -138,6 +138,16 @@ class Page1 extends StatelessWidget {
   }
 
   Widget _buildBottom() {
-    return Text('Bottom');
+    final items = List.generate(10, (index) {
+      return ListTile(
+        leading: Icon(Icons.notifications_none),
+        title: Text('[Event] This is Notufication.'),
+      );
+    });
+    return ListView(
+      physics: NeverScrollableScrollPhysics(),
+      shrinkWrap: true,
+      children: items,
+    );
   }
 }
